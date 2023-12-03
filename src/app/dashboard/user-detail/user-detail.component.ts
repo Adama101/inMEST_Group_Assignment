@@ -1,21 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
-export class UserDetailComponent implements OnInit {
-  userId = '';
-    constructor(private route:ActivatedRoute){}
-    ngOnInit():void{
-      this.route.queryParams.subscribe(param =>{
-        console.log(param, 'query param');
-        this.userId = param["id"];
-      })
+export class UserDetailComponent {
+  user = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    mobileNumber: '',
+    employeeId: '',
+    username: '',
+    role: '',
+    password: ''
+  };
+
+  confirmPassword = '';
+
+  submitForm() {
+    if (this.user.password !== this.confirmPassword) {
+      // Password and confirm password do not match
+      // Handle the error or show a validation message
+      return;
     }
+
+    // Form submission logic goes here
+    // You can send the user data to a server or perform the desired actions
+
+    // Reset the form
+    this.user = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      mobileNumber: '',
+      employeeId: '',
+      username: '',
+      role: '',
+      password: ''
+    };
+    this.confirmPassword = '';
+  }
 }
